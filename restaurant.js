@@ -12,15 +12,32 @@ Loop through each fish thats bought, plug in that into the HTML.
 //const exportedFish = chefPrice(5);
 
 const fishMenu = (chefMaxPrice) => {
+  // Call the chePricePrice function with chefMaxPrice and store the result in fishVariable.
   const fishVariable = chefPrice(chefMaxPrice);
+
+  // Initialize the HTML string with a header and an article tag.
   let HTML = `<h1>Menu</h1>
 
 <article class="menu">`;
-  const halfFishAmount = [];
-  for (const fish of fishVariable) {
+
+  // // initialize an empty array to store fish objects that are halved amount
+  // const halfFishAmount = [];
+
+  // // Loop through each fish object in fishVariable
+  // for (const fish of fishVariable) {
+  //   // Halve the amount property for the current fish object
+  //   fish.amount /= 2;
+  //   // Add the modified fish object to the halfFishAmount array.
+  //   halfFishAmount.push(fish);
+  // }
+
+  const halfFishAmount = fishVariable.map((fish) => {
     fish.amount /= 2;
-    halfFishAmount.push(fish);
-  }
+
+    return fish;
+  });
+
+  // Utilize the map method to create a new array of HTML strings for each fish.
   const fishMap = halfFishAmount.map(
     (fish) => `
   <h2>${fish.species}</h2>
@@ -29,12 +46,15 @@ const fishMenu = (chefMaxPrice) => {
   <section class="menu__item">Grilled ${fish.species}</section>
 `
   );
-  // for (const fish of fishMap) {
-  //   HTML += fish;
-  // }
+
+  // Join the array of HTML strings into a single string.
+  // Separate each string with a space.
   const joinTest = fishMap.join(" ");
 
+  // Append the new joined HTML strings to the HTML variable.
   HTML += joinTest;
+
+  // close the article tag in the HTML string and return the complete HTML string
   HTML += `</article>`;
   return HTML;
 };
